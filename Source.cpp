@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <vector>
 #include <random>
 #include <algorithm>
@@ -30,7 +30,7 @@ public:
     void PrintPheromones()
     {
         int counter = 0;
-        std::cout << std::fixed <<std::setprecision(2);
+        std::cout << std::fixed << std::setprecision(2);
         for (const auto& direction : pheromones)
         {
             std::cout << counter++ << ": " << std::flush;
@@ -46,7 +46,7 @@ public:
 
     void PrintRoads()
     {
-        for (const auto& direction:distances)
+        for (const auto& direction : distances)
         {
             for (const auto& edge : direction)
             {
@@ -238,12 +238,14 @@ public:
 int main() {
     int nNodes = 20;
     Roads roads(nNodes);
-    roads.generateRandomDistances(42,1,100);
+    roads.generateRandomDistances(42, 1, 100);
     roads.precedence[1][3] = true;
+    roads.precedence[2][4] = true;
+    roads.precedence[3][5] = true;
     roads.PrintRoads();
     roads.PrintPrecedence();
 
-    Solver solver(roads, 10, 50, 3, 3.0, 1.0, 0.1, 123,0,2);
+    Solver solver(roads, 10, 50, 3, 3.0, 1.0, 0.1, 123, 0, 4);
     auto [path, cost] = solver.solve();
 
     cout << "Best path: ";
